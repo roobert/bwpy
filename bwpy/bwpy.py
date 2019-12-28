@@ -38,6 +38,10 @@ def parse_args():
 
     args = parser.parse_args()
 
+    if not len(sys.argv) > 1:
+        parser.print_help()
+        sys.exit(1)
+
     if not args.org:
         raise Exception("error: org not specified")
 
