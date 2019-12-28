@@ -6,6 +6,10 @@ install:
 clean:
 	@rm -vrf ${APP}.egg-info venv
 
+publish:
+	@poetry build
+	@poetry publish
+
 dev-run:
 	@poetry run ${APP}
 

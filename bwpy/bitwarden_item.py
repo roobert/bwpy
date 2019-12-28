@@ -71,7 +71,7 @@ class BitwardenItem(BitwardenCollection):
         return None
 
     def insert(self, item_key, item_value):
-        item = self.insert(self.new(item_key, item_value))
+        item = self.create(self.new(item_key, item_value))
         result = self.share(item)
         print(
             f"created new item in {self.org_name}/{self.collection_name}: {self.item_name} ({result['id']})"
