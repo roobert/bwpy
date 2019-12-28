@@ -2,8 +2,9 @@
 
 import sys
 from argparse import ArgumentParser
-from sh import bw
+from sh import bw, ErrorReturnCode
 from .bitwarden_item import BitwardenItem
+from .bitwarden_collection import BitwardenCollection
 
 DESCRIPTION = "bitwarden bwcli(1) wrapper to upsert items in organization collections"
 
@@ -58,16 +59,6 @@ def parse_args():
     if args.item and args.output:
         raise Exception("error: conflicting arguments: --item, --output")
 
-    return parser, args
-
-
-def main():
-    try:
-        parser, args = parse_args()
-    except Exception as error:
-        print(error)
-        sys.exit(1)
-
     bw.sync()
 
     if args.output:
@@ -93,6 +84,17 @@ def main():
         sys.exit()
 
     parser.print_help()
+
+
+def main():
+    try:
+        parse_args()
+    except ErrorReturnCode as error:
+        print(f"error: {error}")
+    except Exception as error:
+        print(error)
+    finally:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
