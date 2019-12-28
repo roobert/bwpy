@@ -5,7 +5,7 @@ from argparse import ArgumentParser
 from sh import bw
 from .bitwarden_item import BitwardenItem
 
-DESCRIPTION = "bitwarden bwcli(1) wrapper to upsert items for organization collections"
+DESCRIPTION = "bitwarden bwcli(1) wrapper to upsert items in organization collections"
 
 
 def parse_args():
