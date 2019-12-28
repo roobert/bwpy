@@ -31,7 +31,7 @@ def parse_args():
     parser.add_argument(
         "-p",
         "--password",
-        help="update an item username to item name, and password to password",
+        help="upsert an item username to item name, and password to password",
         type=str,
         required=False,
     )
