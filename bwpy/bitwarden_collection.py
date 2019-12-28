@@ -2,7 +2,7 @@
 
 import json
 from dataclasses import dataclass
-from sh import bw, echo
+from sh import bw
 from .bitwarden_org import BitwardenOrg
 
 
@@ -17,7 +17,6 @@ class BitwardenCollection(BitwardenOrg):
         return None
 
     def collection_items(self):
-        # FIXME: check for exit status and print out stderr/stdout
         return json.loads(str(bw.list.items("--collectionid", self.collection_id())))
 
     def __str__(self):
