@@ -52,7 +52,7 @@ class BitwardenItem(BitwardenCollection):
             item for item in self.collection_items() if item["name"] == self.item_name
         ]
 
-        if item_names.count(self.item_name) > 1:
+        if len(item_names) > 1:
             raise Exception(
                 f"error: multiple existing entries found for item name in {self.org_name}/{self.collection_name}: {self.item_name}"
             )
