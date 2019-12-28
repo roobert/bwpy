@@ -54,7 +54,8 @@ class BitwardenItem(BitwardenCollection):
 
         if len(item_names) > 1:
             raise Exception(
-                f"error: multiple existing entries found for item name in {self.org_name}/{self.collection_name}: {self.item_name}"
+                f"error: multiple existing entries found for item name in "
+                + "{self.org_name}/{self.collection_name}: {self.item_name}"
             )
 
     def update(self, item_key, item_value):
@@ -65,7 +66,8 @@ class BitwardenItem(BitwardenCollection):
                 new_item["login"][item_key] = item_value
                 result = self.edit(new_item, item["id"])
                 print(
-                    f"updated existing item in {self.org_name}/{self.collection_name}: {self.item_name} ({result['id']})"
+                    f"updated existing item in {self.org_name}/"
+                    + "{self.collection_name}: {self.item_name} ({result['id']})"
                 )
                 return result
         return None
@@ -74,7 +76,8 @@ class BitwardenItem(BitwardenCollection):
         item = self.create(self.new(item_key, item_value))
         result = self.share(item)
         print(
-            f"created new item in {self.org_name}/{self.collection_name}: {self.item_name} ({result['id']})"
+            f"created new item in {self.org_name}/{self.collection_name}:"
+            + " {self.item_name} ({result['id']})"
         )
         return result
 
