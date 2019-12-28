@@ -68,7 +68,7 @@ def parse_args():
     if args.output:
         print(BitwardenCollection(org_name=args.org, collection_name=args.collection))
         bw.sync()
-        sys.exit()
+        sys.exit(0)
 
     if args.password:
         item = BitwardenItem(
@@ -76,7 +76,7 @@ def parse_args():
         )
         item.upsert("password", args.password)
         bw.sync()
-        sys.exit()
+        sys.exit(0)
 
     if args.item and args.set:
         item = BitwardenItem(
@@ -85,7 +85,7 @@ def parse_args():
         key, value = args.set.split(":")
         item.upsert(key, value)
         bw.sync()
-        sys.exit()
+        sys.exit(0)
 
     parser.print_help()
 
@@ -95,9 +95,9 @@ def main():
         parse_args()
     except ErrorReturnCode as error:
         print(f"error: {error}")
+        sys.exit(1)
     except Exception as error:
         print(error)
-    finally:
         sys.exit(1)
 
 
