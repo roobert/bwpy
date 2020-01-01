@@ -26,7 +26,8 @@ def _add_sub_command_push(subparsers):
         "--json",
         help="json to into item template when creating or updating an item",
         type=str,
-        required=True,
+        default="{}",
+        required=False,
     )
     parser_push.add_argument(
         "-f",

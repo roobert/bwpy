@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bwpy"
-version = "0.1.2"
+version = "0.1.3"
 description = ""
 authors = ["Rob Wilson <roobert@gmail.com>"]
 

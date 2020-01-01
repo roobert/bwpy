@@ -15,7 +15,7 @@ bwpy --version
 
 ```
 # create an item called 'item0' - fail if it already exists
-bwpy -o my_org -c secrets push -i item0 -j '{}'
+bwpy -o my_org -c secrets push -i item0
 
 # create or update an item called 'item0', set login and password fields
 bwpy -o my_org -c secrets push -i item0 -f -j '{"login":{ "username":"rob", "password":"password"}}'
