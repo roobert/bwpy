@@ -20,17 +20,21 @@ venv:
 
 version-bump-patch:
 	@poetry version patch
+	@dephell deps convert
 	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
 
 version-bump-minor:
 	@poetry version minor
+	@dephell deps convert
 	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
 
 version-bump-major:
 	@poetry version major
+	@dephell deps convert
 	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
 
 version-update:
+	@dephell deps convert
 	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
 
 publish: setup-convert version-update
