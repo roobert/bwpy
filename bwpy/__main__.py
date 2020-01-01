@@ -8,7 +8,6 @@ def main():
     try:
         args = parse_args()
         args.func(args)
-
     except Exception as error:
         print(error)
         sys.exit(1)
