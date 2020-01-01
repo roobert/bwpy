@@ -27,7 +27,7 @@ def push(args):
         item.insert(json_data)
 
 
-class BWCLIArgumentParser(ArgumentParser):
+class ExtendedHelpArgumentParser(ArgumentParser):
     def error(self, message):
         sys.stderr.write("error: %s\n\n" % message)
         self.print_help()
@@ -35,7 +35,7 @@ class BWCLIArgumentParser(ArgumentParser):
 
 
 def parse_args():
-    parser = BWCLIArgumentParser(
+    parser = ExtendedHelpArgumentParser(
         description="bitwarden bwcli(1) wrapper to upsert items in organization collections"
     )
 
