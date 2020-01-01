@@ -22,10 +22,6 @@ class BitwardenCollection(BitwardenOrg):
     def json(self, filter=None):
         items = []
         for item in self.collection_items():
-            if not item["login"]["username"]:
-                raise KeyError(f"missing 'username' key for item: {item['name']}")
-            if not item["login"]["password"]:
-                raise KeyError(f"missing 'password' key for item: {item['name']}")
             if (not filter) or (filter and filter == item["name"]):
                 items.append(item)
         if not items:
