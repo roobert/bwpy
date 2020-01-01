@@ -14,10 +14,13 @@ bwpy --version
 ## Usage
 
 ```
-# force create an item called 'item0'
-bwpy -o my_org -c secrets push -i item0 -j '{"login":{ "username":"rob", "password":"password"}}'
+# create an item called 'item0' - fail if it already exists
+bwpy -o my_org -c secrets push -i item0 -j '{}'
 
-# force update of password field for item 'item0'
+# create or update an item called 'item0', set login and password fields
+bwpy -o my_org -c secrets push -i item0 -f -j '{"login":{ "username":"rob", "password":"password"}}'
+
+# update of password field for item 'item0'
 bwpy -o my_org -c secrets push -i item0 -f -j '{"login":{ "password":"new_password"}}'
 
 # fetch all items in collection
