@@ -7,7 +7,7 @@ A wrapper for `bwcli(1)` to simplify interacting with organization collections
 ## Install
 
 ```
-pip install .
+pip install bwpy
 bwpy --version
 ```
 
