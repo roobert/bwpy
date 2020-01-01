@@ -5,7 +5,7 @@ import json
 from argparse import ArgumentParser
 from .bitwarden.item import BitwardenItem
 from .bitwarden.collection import BitwardenCollection
-from .bwpy import pull, push, version
+from .bwpy import pull, push, app_version
 
 
 class ExtendedHelpArgumentParser(ArgumentParser):
@@ -72,7 +72,7 @@ def _add_root_command_args(parser):
     parser.add_argument(
         "-c", "--collection", help="collection name", required=True, type=str
     )
-    parser.add_argument("--version", action="version", version=version())
+    parser.add_argument("--version", action="version", version=app_version())
 
 
 def parse_args():

@@ -73,7 +73,7 @@ python-versions = "*"
 version = "1.12.14"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Python Library for Tom's Obvious, Minimal Language"
 name = "toml"
 optional = false
@@ -89,7 +89,7 @@ python-versions = "*"
 version = "1.4.0"
 
 [metadata]
-content-hash = "0d41c551930e4189f4f0a493c2f9410708745348e7ff2940e25592361979b229"
+content-hash = "c4a986f2d2d4c848a2897a3d265856f31417c04ea8c15becded1a5fc7ca8f67e"
 python-versions = "^3.7"
 
 [metadata.files]

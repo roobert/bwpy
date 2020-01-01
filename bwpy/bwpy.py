@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 
-import toml
 import json
 from sh import bw
+from pathlib import Path
 from .bitwarden.item import BitwardenItem
 from .bitwarden.collection import BitwardenCollection
+from .version import version
 
 
-def version():
-    return toml.load("pyproject.toml")["tool"]["poetry"]["version"]
+def app_version():
+    return version
 
 
 def pull(args):

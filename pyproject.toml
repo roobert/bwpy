@@ -1,16 +1,16 @@
 [tool.poetry]
 name = "bwpy"
-version = "0.1.4"
+version = "0.1.6"
 description = ""
 authors = ["Rob Wilson <roobert@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
 sh = "^1.12.14"
-toml = "^0.10.0"
 
 [tool.poetry.dev-dependencies]
 black = "^19.10b0"
+toml = "^0.10.0"
 
 [tool.poetry.scripts]
 bwpy = 'bwpy.__main__:main'
