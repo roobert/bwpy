@@ -35,6 +35,13 @@ def add_sub_command_push(subparsers):
         action="store_true",
         required=False,
     )
+    parser_push.add_argument(
+        "-s",
+        "--silent",
+        help="do not output success message(s)",
+        action="store_true",
+        required=False,
+    )
 
     parser_push.set_defaults(func=push)
 

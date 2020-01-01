@@ -52,25 +52,17 @@ class BitwardenItem(BitwardenCollection):
 
     def insert(self, new_item_data):
         if self.check_exists():
-            raise Exception(f"item already exists: {self.item_name}")
+            raise KeyError(f"item already exists: {self.item_name}")
         item = self.create(self.new(new_item_data))
         result = self.share(item)
-        print(
-            f"created new item in {self.org_name}/{self.collection_name}:"
-            + f" {self.item_name} ({result['id']})"
-        )
         return result
 
     def update(self, new_item_data):
         for item in self.collection_items():
             if item["name"] == self.item_name:
                 result = self.edit(self.new(new_item_data), item["id"])
-                print(
-                    f"updated existing item in {self.org_name}/{self.collection_name}: "
-                    + f"{self.item_name} ({result['id']})"
-                )
                 return result
-        return KeyError(f"item not found: {self.item_name}")
+        raise KeyError(f"item not found: {self.item_name}")
 
     def upsert(self, new_item_data):
         if self.check_exists():
