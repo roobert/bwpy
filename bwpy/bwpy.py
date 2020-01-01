@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 
+import toml
 import json
 from sh import bw
 from .bitwarden.item import BitwardenItem
 from .bitwarden.collection import BitwardenCollection
+
+
+def version():
+    return toml.load("pyproject.toml")["tool"]["poetry"]["version"]
 
 
 def pull(args):

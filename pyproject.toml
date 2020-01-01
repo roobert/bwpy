@@ -1,19 +1,16 @@
 [tool.poetry]
 name = "bwpy"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Rob Wilson <roobert@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
 sh = "^1.12.14"
+toml = "^0.10.0"
 
 [tool.poetry.dev-dependencies]
 black = "^19.10b0"
-
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
 
 [tool.poetry.scripts]
 bwpy = 'bwpy.__main__:main'
@@ -21,3 +18,7 @@ bwpy = 'bwpy.__main__:main'
 [tool.dephell.main]
 from = {format = "poetry", path = "pyproject.toml"}
 to = {format = "setuppy", path = "setup.py"}
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
