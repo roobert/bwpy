@@ -15,7 +15,7 @@ class ExtendedHelpArgumentParser(ArgumentParser):
         sys.exit(2)
 
 
-def __add_sub_command_push(subparsers):
+def _add_sub_command_push(subparsers):
     parser_push = subparsers.add_parser("push", help="push item to remote server")
 
     parser_push.add_argument(
@@ -46,7 +46,7 @@ def __add_sub_command_push(subparsers):
     parser_push.set_defaults(func=push)
 
 
-def __add_sub_command_pull(subparsers):
+def _add_sub_command_pull(subparsers):
     parser_pull = subparsers.add_parser(
         "pull",
         help="fetch remote item(s) from server, defaults to password field",
@@ -64,7 +64,7 @@ def __add_sub_command_pull(subparsers):
     parser_pull.set_defaults(func=pull)
 
 
-def __add_root_command_args(parser):
+def _add_root_command_args(parser):
     parser.add_argument(
         "-o", "--org", help="organization name", required=True, type=str
     )
@@ -78,12 +78,12 @@ def parse_args():
         description="bitwarden bwcli(1) wrapper to upsert items in organization collections"
     )
 
-    __add_root_command_args(parser)
+    _add_root_command_args(parser)
 
     subparsers = parser.add_subparsers(help="sub_command help", dest="sub_command")
     subparsers.required = True
 
-    __add_sub_command_pull(subparsers)
-    __add_sub_command_push(subparsers)
+    _add_sub_command_pull(subparsers)
+    _add_sub_command_push(subparsers)
 
     return parser.parse_args()
