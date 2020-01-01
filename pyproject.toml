@@ -16,7 +16,7 @@ requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
 [tool.poetry.scripts]
-bwpy = 'bwpy.bwpy:main'
+bwpy = 'bwpy.__main__:main'
 
 [tool.dephell.main]
 from = {format = "poetry", path = "pyproject.toml"}

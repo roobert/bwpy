@@ -1,21 +1,33 @@
 #!/usr/bin/env python
 
-import sys
-from .cli import parse_args
+import json
 from sh import bw
+from .bitwarden.item import BitwardenItem
+from .bitwarden.collection import BitwardenCollection
 
 
-def main():
-    try:
-        bw.sync()
-        args = parse_args()
-        args.func(args)
-        bw.sync()
+def pull(args):
+    bw.sync()
 
-    except Exception as error:
-        print(error)
-        sys.exit(1)
+    collection = BitwardenCollection(
+        org_name=args.org, collection_name=args.collection,
+    )
+
+    print(collection.json(filter=args.item))
 
 
-if __name__ == "__main__":
-    main()
+def push(args):
+    item = BitwardenItem(
+        org_name=args.org, collection_name=args.collection, item_name=args.item
+    )
+
+    json_data = json.loads(args.json)
+
+    bw.sync()
+
+    if args.force:
+        item.upsert(json_data)
+    else:
+        item.insert(json_data)
+
+    bw.sync()

@@ -5,26 +5,7 @@ import json
 from argparse import ArgumentParser
 from .bitwarden.item import BitwardenItem
 from .bitwarden.collection import BitwardenCollection
-
-
-def pull(args):
-    collection = BitwardenCollection(
-        org_name=args.org, collection_name=args.collection,
-    )
-    print(collection.json(filter=args.item))
-
-
-def push(args):
-    item = BitwardenItem(
-        org_name=args.org, collection_name=args.collection, item_name=args.item
-    )
-
-    json_data = json.loads(args.json)
-
-    if args.force:
-        item.upsert(json_data)
-    else:
-        item.insert(json_data)
+from .bwpy import pull, push
 
 
 class ExtendedHelpArgumentParser(ArgumentParser):
