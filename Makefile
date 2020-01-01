@@ -15,9 +15,6 @@ venv:
 	@echo "# run:"
 	@echo "source venv/bin/activate"
 
-setup-convert:
-	@dephell deps convert
-
 version-bump-patch:
 	@poetry version patch
 	@dephell deps convert
@@ -33,8 +30,10 @@ version-bump-major:
 	@dephell deps convert
 	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
 
-version-update:
+setup-convert:
 	@dephell deps convert
+
+version-update:
 	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
 
 publish: setup-convert version-update
