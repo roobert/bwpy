@@ -26,11 +26,11 @@ def push(args):
     bw.sync()
 
     if args.force:
-        item.upsert(json_data)
+        result = item.upsert(json_data)
     else:
-        item.insert(json_data)
+        result = item.insert(json_data)
 
     if not args.silent:
-        print(f"successfully pushed item: {args.item}")
+        print(f"successfully pushed item: {args.item} ({result['id']})")
 
     bw.sync()
