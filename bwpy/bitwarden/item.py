@@ -11,16 +11,16 @@ class BitwardenItem(BitwardenCollection):
     item_name: str
 
     @staticmethod
-    def item_template():
+    def __item_template():
         return json.loads(str(bw.get.template.item()))
 
     @staticmethod
-    def login_template():
+    def __login_template():
         return json.loads(str(bw.get.template("item.login")))
 
     def __new(self, new_item_data):
-        item_template = self.item_template()
-        login_template = self.login_template()
+        item_template = self.__item_template()
+        login_template = self.__login_template()
         item_template["login"] = login_template
         item_template["login"]["totp"] = ""
         item_template["notes"] = ""
@@ -34,10 +34,10 @@ class BitwardenItem(BitwardenCollection):
                 return True
 
     def __share(self, item):
-        collection_ids = [self.__collection_id()]
+        collection_ids = [self.collection_id()]
         item_id = item["id"]
         result = bw.share(
-            item_id, self.__org_id(), bw.encode(echo(json.dumps(collection_ids)))
+            item_id, self.org_id(), bw.encode(echo(json.dumps(collection_ids)))
         )
         return json.loads(str(result.stdout, "utf-8").rstrip())
 
