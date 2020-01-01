@@ -39,7 +39,6 @@ class BitwardenItem(BitwardenCollection):
         result = bw.share(
             item_id, self.org_id(), bw.encode(echo(json.dumps(collection_ids)))
         )
-
         return json.loads(str(result.stdout, "utf-8").rstrip())
 
     def create(self, item):
