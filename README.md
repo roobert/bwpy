@@ -2,7 +2,7 @@
 
 ## About
 
-A wrapper for `bwcli(1)` to simplify interacting with organizations item collections
+A wrapper for `bwcli(1)` to simplify interacting with organization collections
 
 ## Install
 

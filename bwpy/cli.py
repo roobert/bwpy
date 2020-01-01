@@ -50,7 +50,7 @@ def _add_sub_command_pull(subparsers):
     parser_pull = subparsers.add_parser(
         "pull",
         help="fetch remote item(s) from server, defaults to password field",
-        description="fetch items from organization collection - by default fetch all items",
+        description="fetch items from an organization collection - by default fetch all items",
     )
 
     parser_pull.add_argument(
@@ -76,7 +76,7 @@ def _add_root_command_args(parser):
 
 def parse_args():
     parser = ExtendedHelpArgumentParser(
-        description="bitwarden bwcli(1) wrapper to upsert items in organization collections"
+        description="bitwarden bwcli(1) wrapper to simplify interacting with in organization collections"
     )
 
     _add_root_command_args(parser)
