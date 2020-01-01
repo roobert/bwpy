@@ -29,12 +29,12 @@ class BitwardenItem(BitwardenCollection):
         return item_template
 
     def __check_exists(self):
-        for item in self.__collection_items():
+        for item in self.collection_items():
             if item["name"] == self.item_name:
                 return True
 
     def __share(self, item):
-        collection_ids = [self.collection_id()]
+        collection_ids = [self.__collection_id()]
         item_id = item["id"]
         result = bw.share(
             item_id, self.__org_id(), bw.encode(echo(json.dumps(collection_ids)))
@@ -50,21 +50,21 @@ class BitwardenItem(BitwardenCollection):
         return json.loads(str(result.stdout, "utf-8").rstrip())
 
     def update(self, new_item_data):
-        for item in self.__collection_items():
+        for item in self.collection_items():
             if item["name"] == self.item_name:
-                result = self.__edit(self.new(new_item_data), item["id"])
+                result = self.__edit(self.__new(new_item_data), item["id"])
                 return result
         raise KeyError(f"item not found: {self.item_name}")
 
     def insert(self, new_item_data):
-        if self.check_exists():
+        if self.__check_exists():
             raise KeyError(f"item already exists: {self.item_name}")
         item = self.__create(self.__new(new_item_data))
         result = self.__share(item)
         return result
 
     def upsert(self, new_item_data):
-        if self.check_exists():
+        if self.__check_exists():
             result = self.update(new_item_data)
         else:
             result = self.insert(new_item_data)

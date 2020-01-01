@@ -9,14 +9,14 @@ from sh import bw
 class BitwardenOrg:
     org_name: str
 
-    def __org_id(self):
+    def org_id(self):
         orgs = json.loads(str(bw.list.organizations()))
         for org in orgs:
             if org["name"] == self.org_name:
                 return org["id"]
         raise KeyError(f"organization not found: {org['name']}")
 
-    def __org_collections(self):
+    def org_collections(self):
         return json.loads(
-            str(bw.list("org-collections", "--organizationid", self.__org_id()))
+            str(bw.list("org-collections", "--organizationid", self.org_id()))
         )
