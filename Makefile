@@ -10,13 +10,13 @@ clean:
 dev-run:
 	@poetry run ${APP}
 
-setup-convert:
-	@dephell deps convert
-
 venv:
 	@virtualenv venv
 	@echo "# run:"
 	@echo "source venv/bin/activate"
+
+setup-convert:
+	@dephell deps convert
 
 version-bump-patch:
 	@poetry version patch
