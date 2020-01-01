@@ -57,17 +57,21 @@ def add_sub_command_pull(subparsers):
     parser_pull.set_defaults(func=pull)
 
 
-def parse_args():
-    parser = ExtendedHelpArgumentParser(
-        description="bitwarden bwcli(1) wrapper to upsert items in organization collections"
-    )
-
+def add_root_command_args(parser):
     parser.add_argument(
         "-o", "--org", help="organization name", required=True, type=str
     )
     parser.add_argument(
         "-c", "--collection", help="collection name", required=True, type=str
     )
+
+
+def parse_args():
+    parser = ExtendedHelpArgumentParser(
+        description="bitwarden bwcli(1) wrapper to upsert items in organization collections"
+    )
+
+    add_root_command_args(parser)
 
     subparsers = parser.add_subparsers(help="sub_command help", dest="sub_command")
     subparsers.required = True
