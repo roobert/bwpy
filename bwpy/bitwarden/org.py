@@ -14,7 +14,6 @@ class BitwardenOrg:
         for org in orgs:
             if org["name"] == self.org_name:
                 return org["id"]
-
         raise KeyError(f"organization not found: {org['name']}")
 
     def org_collections(self):
