@@ -25,4 +25,7 @@ bwpy -o my_org -c secrets pull | jq .
 
 # fetch a specific item from collection
 bwpy -o my_org -c secrets pull -i item0| jq .
+
+# pull items and format in 'key = "value"' format
+bwpy -o my_org -c secrets pull | jq -r '.[] | "\(.name) = \"\(.login.password)\""'
 ```
