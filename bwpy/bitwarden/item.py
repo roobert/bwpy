@@ -18,7 +18,7 @@ class BitwardenItem(BitwardenCollection):
     def login_template():
         return json.loads(str(bw.get.template("item.login")))
 
-    def new(self, new_item_data):
+    def __new(self, new_item_data):
         item_template = self.item_template()
         login_template = self.login_template()
         item_template["login"] = login_template
@@ -28,40 +28,40 @@ class BitwardenItem(BitwardenCollection):
         item_template.update(new_item_data)
         return item_template
 
-    def check_exists(self):
-        for item in self.collection_items():
+    def __check_exists(self):
+        for item in self.__collection_items():
             if item["name"] == self.item_name:
                 return True
 
-    def share(self, item):
+    def __share(self, item):
         collection_ids = [self.collection_id()]
         item_id = item["id"]
         result = bw.share(
-            item_id, self.org_id(), bw.encode(echo(json.dumps(collection_ids)))
+            item_id, self.__org_id(), bw.encode(echo(json.dumps(collection_ids)))
         )
         return json.loads(str(result.stdout, "utf-8").rstrip())
 
-    def create(self, item):
+    def __create(self, item):
         result = bw.create.item(bw.encode(echo(json.dumps(item))))
         return json.loads(str(result.stdout, "utf-8").rstrip())
 
-    def edit(self, new_item, existing_item_id):
+    def __edit(self, new_item, existing_item_id):
         result = bw.edit.item(existing_item_id, bw.encode(echo(json.dumps(new_item))))
         return json.loads(str(result.stdout, "utf-8").rstrip())
+
+    def update(self, new_item_data):
+        for item in self.__collection_items():
+            if item["name"] == self.item_name:
+                result = self.__edit(self.new(new_item_data), item["id"])
+                return result
+        raise KeyError(f"item not found: {self.item_name}")
 
     def insert(self, new_item_data):
         if self.check_exists():
             raise KeyError(f"item already exists: {self.item_name}")
-        item = self.create(self.new(new_item_data))
-        result = self.share(item)
+        item = self.__create(self.__new(new_item_data))
+        result = self.__share(item)
         return result
-
-    def update(self, new_item_data):
-        for item in self.collection_items():
-            if item["name"] == self.item_name:
-                result = self.edit(self.new(new_item_data), item["id"])
-                return result
-        raise KeyError(f"item not found: {self.item_name}")
 
     def upsert(self, new_item_data):
         if self.check_exists():
