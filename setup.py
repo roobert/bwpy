@@ -15,7 +15,7 @@ readme = ''
 setup(
     long_description=readme,
     name='bwpy',
-    version='0.1.5',
+    version='0.1.6',
     python_requires='==3.*,>=3.7.0',
     author='Rob Wilson',
     author_email='roobert@gmail.com',
@@ -23,6 +23,6 @@ setup(
     packages=['bwpy', 'bwpy.bitwarden'],
     package_dir={"": "."},
     package_data={},
-    install_requires=['sh==1.*,>=1.12.14', 'toml==0.*,>=0.10.0'],
-    extras_require={"dev": ["black==19.*,>=19.10.0"]},
+    install_requires=['sh==1.*,>=1.12.14'],
+    extras_require={"dev": ["black==19.*,>=19.10.0", "toml==0.*,>=0.10.0"]},
 )

@@ -7,8 +7,10 @@ install:
 clean:
 	@rm -vrf ${APP}.egg-info venv
 
-publish:
+update-version:
 	$(shell echo "version = \"${VERSION}\"" > bwpy/version.py)
+
+publish: setup-convert update-version
 	@poetry build
 	@poetry publish
 
