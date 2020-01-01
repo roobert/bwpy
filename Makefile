@@ -7,21 +7,33 @@ install:
 clean:
 	@rm -vrf ${APP}.egg-info venv
 
-update-version:
-	$(shell echo "version = \"${VERSION}\"" > bwpy/version.py)
-
-publish: setup-convert update-version
-	@poetry build
-	@poetry publish
-
 dev-run:
 	@poetry run ${APP}
 
 setup-convert:
 	@dephell deps convert
 
-# venv can be useful for debugging..
 venv:
 	@virtualenv venv
 	@echo "# run:"
 	@echo "source venv/bin/activate"
+
+version-bump-patch:
+	@poetry version patch
+	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
+
+version-bump-minor:
+	@poetry version minor
+	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
+
+version-bump-major:
+	@poetry version major
+	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
+
+version-update:
+	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
+
+publish: setup-convert version-update
+	@poetry build
+	@poetry publish
+
