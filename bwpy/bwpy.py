@@ -27,11 +27,10 @@ def push(args):
 
     if args.force:
         item.upsert(json_data)
-        if not args.silent:
-            print(f"successfully upserted item: {args.item}")
     else:
         item.insert(json_data)
-        if not args.silent:
-            print(f"successfully inserted item: {args.item}")
+
+    if not args.silent:
+        print(f"successfully pushed item: {args.item}")
 
     bw.sync()
