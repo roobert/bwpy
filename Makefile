@@ -4,10 +4,13 @@ VERSION := $(shell python -c 'import toml; print(toml.load("pyproject.toml")["to
 install:
 	@poetry install
 
+docker:
+	docker build . --tag ${APP}
+
 clean:
 	@rm -vrf ${APP}.egg-info venv
 
-dev-run:
+dev:
 	@poetry run ${APP}
 
 venv:
@@ -15,28 +18,24 @@ venv:
 	@echo "# run:"
 	@echo "source venv/bin/activate"
 
-version-bump-patch:
+setup:
+	@dephell deps convert
+
+version: setup
+	$(shell echo "__version__ = \"${VERSION}\"" > ${APP}/version.py)
+
+version-patch:
 	@poetry version patch
-	@dephell deps convert
-	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
+	@(make version)
 
-version-bump-minor:
+version-minor:
 	@poetry version minor
-	@dephell deps convert
-	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
+	@(make version)
 
-version-bump-major:
+version-major:
 	@poetry version major
-	@dephell deps convert
-	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
+	@(make version)
 
-setup-convert:
-	@dephell deps convert
-
-version-update:
-	$(shell echo "version = \"${VERSION}\"" > ${APP}/version.py)
-
-publish: setup-convert version-update
+publish:
 	@poetry build
 	@poetry publish
-

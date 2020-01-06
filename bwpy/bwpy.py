@@ -2,14 +2,13 @@
 
 import json
 from sh import bw
-from pathlib import Path
 from .bitwarden.item import BitwardenItem
 from .bitwarden.collection import BitwardenCollection
-from .version import version
+from .version import __version__
 
 
-def app_version():
-    return version
+def version():
+    return __version__
 
 
 def pull(args):
